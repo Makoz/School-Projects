@@ -515,15 +515,15 @@ n == (2*origN-1) Flag = 1 ie. bottom now
 
 separateGame :: String -> Int ->Int->Int->[String]->[String]
 separateGame gameState n origN flag acc
-	| null gameState	 = reverse(acc)
+	| null gameState     = reverse(acc)
 	| n == (2*origN -1)  = separateGame (drop n gameState) (n-1) origN 1 ((take n gameState):acc) 
-	| flag == 1			 = separateGame (drop n gameState) (n-1) origN 1 ((take n gameState):acc)
-	| otherwise			 = separateGame (drop n gameState) (n+1) origN 0 ((take n gameState):acc)
+	| flag == 1	     = separateGame (drop n gameState) (n-1) origN 1 ((take n gameState):acc)
+	| otherwise	     = separateGame (drop n gameState) (n+1) origN 0 ((take n gameState):acc)
 	
 historySeperator :: [String]->Int->[[String]]->[[String]]
 historySeperator history n acc
 	| null history	= acc
-	| otherwise =  historySeperator (tail history) n ((separateGame (head history) n n 0 []):acc)
+	| otherwis	=  historySeperator (tail history) n ((separateGame (head history) n n 0 []):acc)
 
 	
 	
