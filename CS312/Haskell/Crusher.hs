@@ -295,78 +295,78 @@ countBottomRight1Crush prev curr next rest index flag side
 
 countBottomRight2Crush :: [String]->String->String->String->[String]->Int->Int->Char->Char->Int
 countBottomRight2Crush prev curr next next2 rest index flag side enemySide		
-	| (flag == 1) && (index >= 2) && ((next !! (index-1)) == side) && ((next2 !! (index-2)) /= side) =1
+	| (flag == 1) && (index >= 2) && ((next !! (index-1)) == side) && ((next2 !! (index-2)) /= side) 									=1
 	| (not (null prev)) && (length curr) == (2*(length (head prev))-2) && (flag == 0) && (index >= 1) && (next !! (index-1)) == side && (next2 !! (index-2)) /= side	= 1
-	| (not (null prev)) && (length curr) == (2*(length (head prev))-1) && (index >= 2) && (next !! (index-1)) == side && (next2 !! (index-2)) /= side	= 1
-	| (flag == 0) && (length curr) < (length next2) &&(next !! index == side) && (next2 !! index) /= side && (length curr) /= (length next2)	= 1
-	| (flag == 0) && (length curr) == (length next2) && (next !! index) == side && (next2 !! (index-1)) /= side	= 1
-	| otherwise		= 0
+	| (not (null prev)) && (length curr) == (2*(length (head prev))-1) && (index >= 2) && (next !! (index-1)) == side && (next2 !! (index-2)) /= side			= 1
+	| (flag == 0) && (length curr) < (length next2) &&(next !! index == side) && (next2 !! index) /= side && (length curr) /= (length next2)				= 1
+	| (flag == 0) && (length curr) == (length next2) && (next !! index) == side && (next2 !! (index-1)) /= side								= 1
+	| otherwise																				= 0
 
 	
 countBottomLeftCrush :: [String]->String->String->[String]->Int->Int->Char->Char->Int
 countBottomLeftCrush prev currRow next rest flag lsIdx side enemySide
-  | (length rest) < 1			= countBottomLeft1Crush prev currRow next rest lsIdx flag side
-	| otherwise					= (countBottomLeft2Crush prev currRow next (head rest) (tail rest) lsIdx flag side enemySide) + countBottomLeft1Crush prev currRow next rest lsIdx flag side
+  	| (length rest) < 1		= countBottomLeft1Crush prev currRow next rest lsIdx flag side
+	| otherwise			= (countBottomLeft2Crush prev currRow next (head rest) (tail rest) lsIdx flag side enemySide) + countBottomLeft1Crush prev currRow next rest lsIdx flag side
 													
 countBottomLeft1Crush :: [String]->String->String->[String]->Int->Int->Char->Int
 countBottomLeft1Crush prev curr next rest index flag side
-	| (index == 0) && (flag == 1)	= 0
-	| (null rest) && (flag == 0) && ((2*(length(head prev))-1) == (length curr)) && (index >=1) && ((next !! (index-1)) == '-')	= 1
-	| (not (null rest)) && (flag == 0) && ((2*(length(last rest))-1) /= (length curr)) && ((next !! index) == '-')						= 1
+	| (index == 0) && (flag == 1)														= 0
+	| (null rest) && (flag == 0) && ((2*(length(head prev))-1) == (length curr)) && (index >=1) && ((next !! (index-1)) == '-')		= 1
+	| (not (null rest)) && (flag == 0) && ((2*(length(last rest))-1) /= (length curr)) && ((next !! index) == '-')				= 1
 	| (not (null rest)) &&  (flag == 0) && ((2*(length(last rest))-1) == (length curr)) && (index >=1) && ((next !! (index-1)) == '-')	= 1
-	| (flag == 1) && (index >= 1) && (next !! (index-1)) == '-'														= 1
+	| (flag == 1) && (index >= 1) && (next !! (index-1)) == '-'										= 1
 	| otherwise																										= 0
 
 countBottomLeft2Crush :: [String]->String->String->String->[String]->Int->Int->Char->Char->Int
 countBottomLeft2Crush prev curr next next2 rest index flag side enemyside	
-	| (flag == 1) && (index >= 2) && ((next !! (index-1)) == side) && ((next2 !! (index-2)) /= side) = 1
+	| (flag == 1) && (index >= 2) && ((next !! (index-1)) == side) && ((next2 !! (index-2)) /= side) 									= 1
 	| (not (null prev)) && (length curr) == (2*(length (head prev))-2) && (flag == 0) && (index >= 1) && (next !! (index-1)) == side && (next2 !! (index-2)) /= side	= 1
-	| (not (null prev)) && (length curr) == (2*(length (head prev))-1) && (index >= 2) && (next !! (index-1)) == side && (next2 !! (index-2)) /= side	= 1
-	| (flag == 0) && (length curr) < (length next2) &&(next !! index == side) && (next2 !! index) /= side && (length curr) /= (length next2)	= 1
-	| (flag == 0) && (length curr) == (length next2) && (next !! index) == side && (next2 !! (index-1)) /= side	= 1
-	| otherwise																						= 0
+	| (not (null prev)) && (length curr) == (2*(length (head prev))-1) && (index >= 2) && (next !! (index-1)) == side && (next2 !! (index-2)) /= side			= 1
+	| (flag == 0) && (length curr) < (length next2) &&(next !! index == side) && (next2 !! index) /= side && (length curr) /= (length next2)				= 1
+	| (flag == 0) && (length curr) == (length next2) && (next !! index) == side && (next2 !! (index-1)) /= side								= 1
+	| otherwise																				= 0
 
 countTopLeftCrush :: [String]->String->String->[String]->Int->Int->Char->Char->Int
 countTopLeftCrush prev rowprev curr rest index flag side enemySide
 	| length(prev) < 1						= countTopLeft1Crush prev rowprev curr rest index flag side
-	| otherwise								= (countTopLeft2Crush (reverse(tail(reverse(prev)))) (last prev) rowprev curr rest index flag side enemySide) + countTopLeft1Crush prev rowprev curr rest index flag side
+	| otherwise							= (countTopLeft2Crush (reverse(tail(reverse(prev)))) (last prev) rowprev curr rest index flag side enemySide) + countTopLeft1Crush prev rowprev curr rest index flag side
 	
 countTopLeft1Crush :: [String]->String->String->[String]->Int->Int->Char->Int
 countTopLeft1Crush prev rowprev curr rest index flag side
-	| (index == 0) && (flag == 0)	= 0
+	| (index == 0) && (flag == 0)							= 0
 	| (flag == 0) && ((curr !! index) == side) && ((rowprev !! (index-1)) == '-')	= 1
 	| (flag == 1) &&  ((curr !! index) == side) && (((rowprev !! index)) == '-')	= 1
-	| otherwise							= 0
+	| otherwise									= 0
 	
 
 countTopLeft2Crush :: [String]->String->String->String->[String]->Int->Int->Char->Char->Int
 countTopLeft2Crush	prev rowprev2 rowprev curr rest index flag side	enemyside
-	| (flag == 0) && (index >= 2) && ((curr !! index) == side) && ((rowprev !! (index-1)) == side) && ((rowprev2 !! (index-2)) /= side) = 1
-	| (null prev) && (flag == 1) && (index >= 1) && ((curr !! index) == side) && ((rowprev !! index) == side) && ((rowprev2 !! (index-1)) /= side)	= 1
-	| (not (null prev)) && (flag == 1) && (length(curr) == ((2*(length(head prev))-2))) &&  (index >= 1) && ((curr !! index) == side) && ((rowprev !! index) == side) && ((rowprev2 !! (index-1)) /= side)	= 1
+	| (flag == 0) && (index >= 2) && ((curr !! index) == side) && ((rowprev !! (index-1)) == side) && ((rowprev2 !! (index-2)) /= side) 												  = 1
+	| (null prev) && (flag == 1) && (index >= 1) && ((curr !! index) == side) && ((rowprev !! index) == side) && ((rowprev2 !! (index-1)) /= side)											  = 1
+	| (not (null prev)) && (flag == 1) && (length(curr) == ((2*(length(head prev))-2))) &&  (index >= 1) && ((curr !! index) == side) && ((rowprev !! index) == side) && ((rowprev2 !! (index-1)) /= side)			          = 1
 	| (not (null prev)) && (flag == 1) && (length(curr) <  ((2*(length(head prev))-2))) && (length(curr) /= (2*(length (head prev)-1))) && ((curr !! index) == side) && ((rowprev !! index) == side) && ((rowprev2 !! index) /= side) = 1
 	| otherwise		= 0
 
 countTopRightCrush :: [String]->String->String->[String]->Int->Int->Char->Char->Int
 countTopRightCrush prev rowprev curr rest index flag side enemyside
 	| length(prev) <1		= countTopRight1Crush prev (reverse rowprev) (reverse curr) rest ((length curr)-1-index) flag side
-	| otherwise				= (countTopRight2Crush (reverse(tail(reverse(prev)))) (reverse (last prev)) (reverse rowprev) (reverse curr) rest ((length curr) - 1 - index) flag side enemyside) + countTopRight1Crush prev (reverse rowprev) (reverse curr) rest ((length curr)-1-index) flag side
+	| otherwise			= (countTopRight2Crush (reverse(tail(reverse(prev)))) (reverse (last prev)) (reverse rowprev) (reverse curr) rest ((length curr) - 1 - index) flag side enemyside) + countTopRight1Crush prev (reverse rowprev) (reverse curr) rest ((length curr)-1-index) flag side
 
 countTopRight1Crush :: [String]->String->String->[String]->Int->Int->Char->Int
 countTopRight1Crush prev rowprev curr rest index flag side
-	| (index == 0) && (flag == 0)	= 0
+	| (index == 0) && (flag == 0)							= 0
 	| (flag == 0) && ((curr !! index) == side) && ((rowprev !! (index-1)) == '-')	= 1
-	| (flag == 1) &&  ((curr !! index) == side) && (((rowprev !! index)) == '-')		= 1
-	| otherwise							= 0
+	| (flag == 1) &&  ((curr !! index) == side) && (((rowprev !! index)) == '-')    = 1
+	| otherwise									= 0
 	
 
 countTopRight2Crush :: [String]->String->String->String->[String]->Int->Int->Char->Char->Int
 countTopRight2Crush prev rowprev2 rowprev curr rest index flag side enemyside
-	| (flag == 0) && (index >= 2) && ((curr !! index) == side) && ((rowprev !! (index-1)) == side) && ((rowprev2 !! (index-2)) /= side) = 1
-	| (null prev) && (flag == 1) && (index >= 1) && ((curr !! index) == side) && ((rowprev !! index) == side) && ((rowprev2 !! (index-1)) /= side)	= 1
-	| (not (null prev)) && (flag == 1) && (length(curr) == ((2*(length(head prev))-2))) &&  (index >= 1) && ((curr !! index) == side) && ((rowprev !! index) == side) && ((rowprev2 !! (index-1)) /= side)	= 1
+	| (flag == 0) && (index >= 2) && ((curr !! index) == side) && ((rowprev !! (index-1)) == side) && ((rowprev2 !! (index-2)) /= side) 												  = 1
+	| (null prev) && (flag == 1) && (index >= 1) && ((curr !! index) == side) && ((rowprev !! index) == side) && ((rowprev2 !! (index-1)) /= side)									                  = 1
+	| (not (null prev)) && (flag == 1) && (length(curr) == ((2*(length(head prev))-2))) &&  (index >= 1) && ((curr !! index) == side) && ((rowprev !! index) == side) && ((rowprev2 !! (index-1)) /= side)				  = 1
 	| (not (null prev)) && (flag == 1) && (length(curr) <  ((2*(length(head prev))-2))) && (length(curr) /= (2*(length (head prev)-1))) && ((curr !! index) == side) && ((rowprev !! index) == side) && ((rowprev2 !! index) /= side) = 1
-	| otherwise		= 0	
+	| otherwise																											  = 0	
 
 countLeftCrush :: [String]->String->[String]->Int->Char->Char->Int
 countLeftCrush prev curr rest index side enemySide
@@ -374,15 +374,15 @@ countLeftCrush prev curr rest index side enemySide
 
 countLeft1Crush :: [String]->String->[String]->Int->Char->Int
 countLeft1Crush prev curr rest index side
-	| index == 0		= 0
+	| index == 0							= 0
 	| ((curr !! index) == side) && (curr !! (index-1) == '-')	= 1
-	| otherwise			= 0
+	| otherwise							= 0
 	
 countLeft2Crush :: [String]->String->[String]->Int->Char->Char->Int
 countLeft2Crush prev curr rest index side enemyside
-	| index < 2														= 0
+	| index < 2										 	= 0
 	| ((curr !! index) == side) && ((curr !! (index-1)) == side) && ((curr !! (index-2)) /= side)	= 1
-	| otherwise														= 0
+	| otherwise											= 0
 
 	
 
@@ -392,16 +392,16 @@ countRightCrush prev curr rest index side enemyside
 
 countRight1Crush :: [String]->String->[String]->Int->Char->Int
 countRight1Crush prev curr rest index side
-	| index > ((length curr) - 2)		= 0
+	| index > ((length curr) - 2)					= 0
 	| ((curr !! index) == side) && (curr !! (index+1) == '-')	= 1
-	| otherwise			= 0
+	| otherwise							= 0
 
 	
 countRight2Crush :: [String]->String->[String]->Int->Char->Char->Int
 countRight2Crush prev curr rest index side enemyside
-	| index > ((length curr) - 3)		= 0
+	| index > ((length curr) - 3)									= 0
 	| ((curr !! index) == side) && ((curr !! (index+1)) == side) && ((curr !! (index+2)) /= side)	= 1
-	| otherwise														= 0
+	| otherwise											= 0
 		
 	
 
@@ -413,36 +413,36 @@ crushCounter gameState mySide enemySide n
 
 generateCrushes :: [String]->[String]->Int->Int->Int->Int->Char->Char->[[String]]->Int->Int
 generateCrushes gameState origGS rowNum flag switch n side enemySide history acc
-	| null gameState							= acc
-	| (flag == 1) || (switch == 1)				= generateCrushes (tail gameState) origGS (rowNum+1) 1 n switch side enemySide history ((generateCrushMoves (take rowNum origGS) (origGS !! rowNum) (drop (rowNum+1) origGS) flag (findIndices (==side) (origGS !! rowNum)) side enemySide 0) + acc)
+	| null gameState				= acc
+	| (flag == 1) || (switch == 1)			= generateCrushes (tail gameState) origGS (rowNum+1) 1 n switch side enemySide history ((generateCrushMoves (take rowNum origGS) (origGS !! rowNum) (drop (rowNum+1) origGS) flag (findIndices (==side) (origGS !! rowNum)) side enemySide 0) + acc)
 	| ((length (head gameState)) == (2*n -1)) 	= generateCrushes (tail gameState) origGS (rowNum+1) 0 n 1 side enemySide history ((generateCrushMoves (take rowNum origGS) (origGS !! rowNum) (drop (rowNum+1) origGS) flag (findIndices (==side) (origGS !! rowNum)) side enemySide 0) + acc)
-	| otherwise									= generateCrushes (tail gameState) origGS (rowNum+1) 0 n switch side enemySide history ((generateCrushMoves (take rowNum origGS) (origGS !! rowNum) (drop (rowNum+1) origGS) flag (findIndices (==side) (origGS !! rowNum)) side enemySide 0) + acc)
+	| otherwise					= generateCrushes (tail gameState) origGS (rowNum+1) 0 n switch side enemySide history ((generateCrushMoves (take rowNum origGS) (origGS !! rowNum) (drop (rowNum+1) origGS) flag (findIndices (==side) (origGS !! rowNum)) side enemySide 0) + acc)
 
 	
 generateCrushMoves :: [String]->String->[String]->Int->[Int]->Char->Char->Int->Int
 generateCrushMoves prev currRow rest flag lsIdx side enemySide acc
 	| null lsIdx		= acc																																																																																				
-	| null prev			= generateCrushMoves prev currRow rest flag (tail lsIdx) side enemySide (acc + (moveLeftCrush prev currRow rest (head lsIdx) side enemySide) + (moveRightCrush prev currRow rest (head lsIdx) side enemySide)+ (moveBottomLeftCrush prev currRow (head rest) (tail rest) (head lsIdx) flag side enemySide) + (moveBottomRightCrush prev currRow (head rest) (tail rest) (head lsIdx) flag side enemySide)) -- No TopLeft/TopRight movement
-	| null rest			= generateCrushMoves prev currRow rest flag (tail lsIdx) side enemySide (acc + (moveLeftCrush prev currRow rest (head lsIdx) side enemySide) + (moveRightCrush prev currRow rest (head lsIdx) side enemySide)+ (moveTopLeftCrush (reverse(tail(reverse(prev)))) (last prev) currRow rest (head lsIdx) flag side enemySide)) -- No BottomLeft/BottomRight 
-	| otherwise			= generateCrushMoves prev currRow rest flag (tail lsIdx) side enemySide (acc + (moveLeftCrush prev currRow rest (head lsIdx) side enemySide) + (moveRightCrush prev currRow rest (head lsIdx) side enemySide)+ (moveTopLeftCrush (reverse(tail(reverse(prev)))) (last prev) currRow rest (head lsIdx) flag side enemySide)+( moveTopRightCrush (reverse(tail(reverse(prev)))) (last prev) currRow rest (head lsIdx) flag side enemySide)+ (moveBottomLeftCrush prev currRow (head rest) (tail rest) flag (head lsIdx) side enemySide)+ (moveBottomRightCrush prev currRow (head rest) (tail rest) flag (head lsIdx) side enemySide)) -- Enable all movements	
+	| null prev		= generateCrushMoves prev currRow rest flag (tail lsIdx) side enemySide (acc + (moveLeftCrush prev currRow rest (head lsIdx) side enemySide) + (moveRightCrush prev currRow rest (head lsIdx) side enemySide)+ (moveBottomLeftCrush prev currRow (head rest) (tail rest) (head lsIdx) flag side enemySide) + (moveBottomRightCrush prev currRow (head rest) (tail rest) (head lsIdx) flag side enemySide)) -- No TopLeft/TopRight movement
+	| null rest		= generateCrushMoves prev currRow rest flag (tail lsIdx) side enemySide (acc + (moveLeftCrush prev currRow rest (head lsIdx) side enemySide) + (moveRightCrush prev currRow rest (head lsIdx) side enemySide)+ (moveTopLeftCrush (reverse(tail(reverse(prev)))) (last prev) currRow rest (head lsIdx) flag side enemySide)) -- No BottomLeft/BottomRight 
+	| otherwise		= generateCrushMoves prev currRow rest flag (tail lsIdx) side enemySide (acc + (moveLeftCrush prev currRow rest (head lsIdx) side enemySide) + (moveRightCrush prev currRow rest (head lsIdx) side enemySide)+ (moveTopLeftCrush (reverse(tail(reverse(prev)))) (last prev) currRow rest (head lsIdx) flag side enemySide)+( moveTopRightCrush (reverse(tail(reverse(prev)))) (last prev) currRow rest (head lsIdx) flag side enemySide)+ (moveBottomLeftCrush prev currRow (head rest) (tail rest) flag (head lsIdx) side enemySide)+ (moveBottomRightCrush prev currRow (head rest) (tail rest) flag (head lsIdx) side enemySide)) -- Enable all movements	
 	
 	
 
 moveBottomRightCrush :: [String]->String->String->[String]->Int->Int->Char->Char->Int
 moveBottomRightCrush prev currRow next rest flag lsIdx side enemySide
 	| (length rest) < 1			= 0
-	| otherwise					= moveBottomRight2Crush prev (reverse currRow) (reverse next) (reverse (head rest)) (tail rest) ((length currRow)-1-lsIdx) flag side enemySide
+	| otherwise				= moveBottomRight2Crush prev (reverse currRow) (reverse next) (reverse (head rest)) (tail rest) ((length currRow)-1-lsIdx) flag side enemySide
 
 																							
 
 moveBottomRight2Crush :: [String]->String->String->String->[String]->Int->Int->Char->Char->Int
 moveBottomRight2Crush prev curr next next2 rest index flag side enemySide		
-	| (flag == 1) && (index >= 2) && ((next !! (index-1)) == side) && ((next2 !! (index-2)) == enemySide) =1
+	| (flag == 1) && (index >= 2) && ((next !! (index-1)) == side) && ((next2 !! (index-2)) == enemySide									= 1
 	| (not (null prev)) && (length curr) == (2*(length (head prev))-2) && (flag == 0) && (index >= 1) && (next !! (index-1)) == side && (next2 !! (index-2)) == enemySide	= 1
-	| (not (null prev)) && (length curr) == (2*(length (head prev))-1) && (index >= 2) && (next !! (index-1)) == side && (next2 !! (index-2)) == enemySide	= 1
-	| (flag == 0) && (length curr) < (length next2) &&(next !! index == side) && (next2 !! index) == enemySide && (length curr) /= (length next2)	= 1
-	| (flag == 0) && (length curr) == (length next2) && (next !! index) == side && (next2 !! (index-1)) == enemySide	= 1
-	| otherwise		= 0
+	| (not (null prev)) && (length curr) == (2*(length (head prev))-1) && (index >= 2) && (next !! (index-1)) == side && (next2 !! (index-2)) == enemySide			= 1
+	| (flag == 0) && (length curr) < (length next2) &&(next !! index == side) && (next2 !! index) == enemySide && (length curr) /= (length next2)				= 1
+	| (flag == 0) && (length curr) == (length next2) && (next !! index) == side && (next2 !! (index-1)) == enemySide							= 1
+	| otherwise																				= 0
 
 	
 moveBottomLeftCrush :: [String]->String->String->[String]->Int->Int->Char->Char->Int
