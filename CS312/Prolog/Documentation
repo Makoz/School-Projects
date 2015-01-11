@@ -1,0 +1,133 @@
+% Chen Hao Hsu
+% Ellis Ho
+
+Documentation on how to use our prolog program:
+
+Our program will provide a list of suggestions to the user, and when it is confident of an accusation, it will accuse.
+It relies on the player to input suggestions of other players, as well as to input suggestions that were proven wrong to the player.
+It does not tell the player strictly which room to move to next. However, the player should move to the closest room from the list of valid rooms. 
+
+
+How the Program Works:
+
+
+Initialization:
+Double click on the program to open it in SWI-Prolog. 
+We first need to determine what weapons, rooms and character are in the game.
+The program expects 6 characters, 6 weapons and 9 rooms. 
+
+If the game has a list of weapons: 'weap1', 'weap2', 'weap3', .. 'weap9' , where weap1 is the first weapon
+In the console of prolog type in:
+listW('weapon1','weapon2','weapon3','weapon4','weapon5','weapon6').
+
+If the game has a list of characters: 'char1','char2','char3','char4','char5','char6' , where char1 is the first character
+In the console of prolog type in:
+listC('char1','char2','char3','char4', 'chara5','char6').
+
+If the game has a list of rooms 'room1', 'room2', 'room3',...,'room9', where room1 is the first room
+In the console of prolog type in:
+listR('room1','room2','room3','room4','room5','room6','room7','room8','room9').
+
+In the event that the version of the game you're playing has fewer than 6 characters, 9 weapons, or 9 rooms due to fewer than the expected number (6) of players in the game,
+simply fill in the relevant field with a dummy variable. For instance, if the game only had 7 weapons, instead of 9, then when you call
+listW, for fields 'weapon8' and 'weapon9', you can fill it in as 'notplayed1', 'notplayed2', or any other unique name.
+
+Add the three cards you are dealt in the following manner, type into console:
+addHand(C,P), where C denotes the card name, and P is your name, which you can put 'me', or your actual name ie. John Doe.
+For instance, if your name was John Doe and the card in hand you have is axe, type:
+addHand('axe','John Doe').
+
+
+Game play:
+
+ON YOUR TURN:
+
+At the beginning of each turn, before rolling the dice, the user should input into the console:
+validRoom(Y).
+which returns a list of valid rooms still left. To see additional valid rooms, press ";".
+
+Given this list, the player is tasked with moving to the closest room from his game piece based off the role of the dice.
+Once the player is in the valid room, type in to the console:
+giveSugg(X,Y,Z).
+and make a suggestion based off of the suggestions returned that match the current room the game piece is in.
+
+To narrow the suggestions down by the room, say the player is in room 'room1'.
+Then the player can input giveSugg(X,'room1',Z).
+
+Once the suggestion of 'weaponX', 'roomY', 'characterZ' has been made,
+the user should then enter into the console:
+shown(X,Y,Z,C,P,F).
+
+where:
+X - weaponName (ie. input as 'weapon1') that was suggested,
+Y - roomName (ie. input as 'room1') that was suggested,
+Z - characterName (ie. input as 'character1') that was suggested,
+C - the card that was proven wrong by a player. For instance, if weapon1 was proven wrong, the C parameter should be 'weapon1'.
+In the event that the suggestion was not proven wrong, simply put in C.
+P - the player that proved the card wrong.(ie. input as 'player1'). 
+F - if the suggestion was proven wrong, input '1'
+If the suggestion was not proven wrong, input '0'
+
+After shown was entered successfully, if the program tells you to accuse, make the accusation specified by the program.
+Otherwise, type the following into the console:
+checkSugg1.
+checkSugg2.
+checkSugg3.
+
+And end your turn.
+
+
+ON OTHER PLAYERS TURN:
+
+During opponents turn, we keep track of the suggestions made by other players. Type into the console:
+addSugg(W,R,C,PL,PW,PWP).
+where:
+W - the weapon that was suggested input in the format of 'weapon1' (where weapon1 was the weapon suggested ie. axe),
+R - room that was suggested, input in the similar format shown above,
+C - character that was suggested, input in the similar format shown above,
+PL - player that made the suggestion, input the relevant player name ie. 'player3', or 'Mary'
+PW - whether or not the suggestion has been proven wrong, as in do we know what card was shown, input 'no'
+PWP - player that proved the suggestion wrong, input the relevant player name ie. 'player3', or 'Mary'
+
+
+Commands to display information:
+
+allS. - returns all suggestions made so far
+validWeapon(X). - returns all valid Weapons
+validRooom(Y). - returns all valid Rooms
+validCharacter(Z). - returns all valid Characters,
+giveSugg.	- returns a list of possible valid suggestions
+suggestions(X,Y,Z,PL,PW,PWP) - will return a list of suggestions based off of the specified parameters where:
+X - Weapon
+Y - Room
+Z - Character
+PL - player that made the suggestion, input the relevant player name ie. 'player3', or 'Mary'
+PW - whether or not the suggestion has been proven wrong, as in do we know what card was shown, input 'no'
+PWP - player that proved the suggestion wrong, input the relevant player name ie. 'player3', or 'Mary'
+
+
+where validity means that it is possible for one of the following to be the answer.
+
+
+For instance, if you want to find out all the suggestions that are made by player 'Mary' then,
+suggestions(X,Y,Z,'Mary',PW,PWP).
+
+To see your current hand type:
+showHand().
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
