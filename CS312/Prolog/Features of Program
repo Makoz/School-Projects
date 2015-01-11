@@ -1,0 +1,7 @@
+% Chen Hao Hsu
+% Ellis Ho
+
+What we've done:
+Provided access to display more information then the bare minimum, see display section of documentation.
+Program provides suggestions based off of plausible requirements that are still remaining. 
+Program will make factual inferences based off of other peoples suggestions and what has been proven. See checkSugg1, checkSugg2, checkSugg3. 
